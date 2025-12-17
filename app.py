@@ -57,19 +57,17 @@ months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
 fd3["Maandjaar"] = pd.Categorical(fd3["Maandjaar"], categories=months, ordered=True)
 
 # -------------------------
-# 2️⃣ Optional: filter buckets
+# 2️⃣ Filter by Started–Ended range
 # -------------------------
 st.title("Started Heatmap Dashboard")
 
-# Make sure Started and Ended are numeric
+# Ensure numeric
 fd3["Started"] = pd.to_numeric(fd3["Started"], errors="coerce").fillna(0)
 fd3["Ended"] = pd.to_numeric(fd3["Ended"], errors="coerce").fillna(0)
 
-# Determine min and max values for the slider
+# Slider
 min_value = int(fd3["Started"].min())
 max_value = int(fd3["Ended"].max())
-
-# Slider for range selection
 range_values = st.slider(
     "Select Started–Ended range",
     min_value=min_value,
@@ -77,37 +75,20 @@ range_values = st.slider(
     value=(min_value, max_value)
 )
 
-# Filter DataFrame based on slider
+# Filter based on slider
 filtered_df = fd3[(fd3["Started"] >= range_values[0]) & (fd3["Ended"] <= range_values[1])]
-
 st.write(f"Showing {len(filtered_df)} rows in selected range: {range_values}")
 
-buckets = fd3["bucket"].unique()
-selected_buckets = st.multiselect("Select buckets", options=buckets, default=buckets)
-filtered_df = fd3[fd3["bucket"].isin(selected_buckets)]
-
 # -------------------------
-# 3️⃣ Pivot table
+# 3️⃣ Pivot table & heatmap
 # -------------------------
 flights = filtered_df.pivot_table(
     index="bucket",
     columns="Maandjaar",
     values="Started",
-    aggfunc="count"  # or sum/mean
+    aggfunc="count"
 )
 
-# -------------------------
-# 4️⃣ Plot heatmap
-# -------------------------
 fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
-
-# Display in Streamlit
 st.pyplot(fig)
-
-
-
-
-
-
-
