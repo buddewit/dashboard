@@ -3,6 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.set_page_config(
+    page_title="US Population Dashboard",
+    page_icon="🏂",
+    layout="wide",
+    initial_sidebar_state="expanded")
+
 # Set the title
 st.title('Hello Streamlit!')
 
@@ -181,6 +187,7 @@ sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
