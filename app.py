@@ -24,7 +24,7 @@ st.markdown(
 
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
-    color_theme_list = ['Laadpaalmap','Laadpaaldata','Elektrische auto's']
+    color_theme_list = ['Laadpaalmap','Laadpaaldata','Elektrische autos']
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
 
 # Set the title
@@ -205,6 +205,7 @@ sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
