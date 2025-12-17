@@ -72,18 +72,6 @@ range_ts = st.slider(
     value=(min_date, max_date)
     #format="DD-MM-YYYY"
 )
-
-# range_ts is already a tuple of datetime objects, no need to convert with unit="s"
-start_range, end_range = range_ts
-
-
-# -------------------------
-# 3️⃣ Filter and Pivot
-# -------------------------
-# Filter DataFrame using the slider values
-
-st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
-
 range_ts2 = st.slider(
     "Selecteer tijdstip op de dag",
     min_value=min_date2, #to_pydatetime()
@@ -92,7 +80,14 @@ range_ts2 = st.slider(
     #format="DD-MM-YYYY"
 )
 
+# range_ts is already a tuple of datetime objects, no need to convert with unit="s"
+start_range, end_range = range_ts
 start_range2, end_range2 = range_ts2
+
+# -------------------------
+# 3️⃣ Filter and Pivot
+# -------------------------
+# Filter DataFrame using the slider values
 
 filtered_df = fd3[
     (fd3["Maxgevraagd(w)"] >= start_range) & 
@@ -100,7 +95,11 @@ filtered_df = fd3[
     (fd3["hour"] >= start_range2) & 
     (fd3["hour"] <= end_range2)].copy()
 
-st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
+st.write(
+    f"Showing {len(filtered_df)} rows | "
+    f"Wattage: {start_range}–{end_range} | "
+    f"Hour: {start_range2}–{end_range2}"
+)
 
 # Set Categorical order
 months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
@@ -121,6 +120,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
