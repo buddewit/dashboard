@@ -47,13 +47,7 @@ sns.set_theme()
 # -------------------------
 # 1️⃣ Load your real data
 # -------------------------
-fd3 = pd.read_excel("your_file.xlsx")  # <-- your actual Excel
-
-# Optional: remove unnamed columns
-fd3 = fd3.loc[:, ~fd3.columns.str.contains("^Unnamed")]
-
-# Optional: drop completely empty rows
-fd3 = fd3.dropna(how="all")
+fd3 = pd.read_csv('fd2.csv', delimiter=';')
 
 # Make Maandjaar ordered
 months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
@@ -85,6 +79,7 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6))
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
 
 
 
