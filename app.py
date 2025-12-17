@@ -62,22 +62,24 @@ fd3["Maandjaar"] = pd.Categorical(fd3["Maandjaar"], categories=months, ordered=T
 st.title("Started Heatmap Dashboard")
 
 # Ensure numeric
-fd3["Started"] = pd.to_numeric(fd3["Started"], errors="coerce").fillna(0)
-fd3["Ended"] = pd.to_numeric(fd3["Ended"], errors="coerce").fillna(0)
+fd3["Started"] = pd.to_datetime(fd3["Started"], errors="coerce", dayfirst=True)
+fd3["Ended"] = pd.to_datetime(fd3["Ended"], errors="coerce", dayfirst=True)
 
-# Slider
-min_value = int(fd3["Started"].min())
-max_value = int(fd3["Ended"].max())
-range_values = st.slider(
-    "Select Started–Ended range",
-    min_value=min_value,
-    max_value=max_value,
-    value=(min_value, max_value)
+min_date = fd3["Started"].min().date()
+max_date = fd3["Ended"].max().date()
+
+date_range = st.date_input(
+    "Select date range",
+    value=(min_date, max_date),
+    min_value=min_date,
+    max_value=max_date
 )
 
-# Filter based on slider
-filtered_df = fd3[(fd3["Started"] >= range_values[0]) & (fd3["Ended"] <= range_values[1])]
-st.write(f"Showing {len(filtered_df)} rows in selected range: {range_values}")
+# Filter DataFrame by date range
+filtered_df = fd3[(fd3["Started"].dt.date >= date_range[0]) & 
+                  (fd3["Ended"].dt.date <= date_range[1])]
+
+st.write(f"Showing {len(filtered_df)} rows in selected date range: {date_range}")
 
 # -------------------------
 # 3️⃣ Pivot table & heatmap
@@ -92,3 +94,4 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
