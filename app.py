@@ -77,9 +77,9 @@ start_range, end_range = range_ts
 # 3️⃣ Filter and Pivot
 # -------------------------
 # Filter DataFrame using the slider values
-filtered_df = fd3[(fd3["Started"] >= start_range) & (fd3["Ended"] <= end_range)].copy()
+filtered_df = fd3[(fd3[""Maxgevraagd(w)"] >= start_range) & (fd3[""Maxgevraagd(w)"] <= end_range)].copy()
 
-st.write(f"Showing {len(filtered_df)} rows in range: {start_range.strftime('%Y-%m-%d')} to {end_range.strftime('%Y-%m-%d')}")
+st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
 
 # Set Categorical order
 months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
@@ -100,6 +100,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
