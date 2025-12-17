@@ -61,8 +61,8 @@ fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
 fd3["Started_ts"] = fd3["Started"].map(pd.Timestamp.timestamp)
 fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
 
-min_ts = int(fd3["Started_ts"].min())
-max_ts = int(fd3["Ended_ts"].max())
+min_ts = pd.to_datetime(fd3["Started_ts"].min())
+max_ts = pd.to_datetime(fd3["Ended_ts"].max())
 
 range_ts = st.slider(
     "Select Started–Ended range",
@@ -99,6 +99,7 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
 
 
 
