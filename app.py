@@ -45,45 +45,47 @@ sns.set_theme()
 # -------------------------
 # 1️⃣ Load your CSV (from repo or uploaded)
 # -------------------------
-fd3 = pd.read_csv('fd2.csv', delimiter=';')
+fd3 = pd.read_csv("fd2.csv", delimiter=";")
 
-# Optional: clean numeric column
-fd3["Started"] = fd3["Started"].astype(str).str.replace(",", ".")
-fd3["Started"] = pd.to_numeric(fd3["Started"], errors="coerce").fillna(0)
-
-# Make Maandjaar ordered
-months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
-          "jul-24", "aug-24", "sep-24", "okt-24", "nov-24", "dec-24"]
-fd3["Maandjaar"] = pd.Categorical(fd3["Maandjaar"], categories=months, ordered=True)
-
-# -------------------------
-# 2️⃣ Filter by Started–Ended range
-# -------------------------
-st.title("Started Heatmap Dashboard")
-
-# Ensure numeric
+# Convert to datetime
 fd3["Started"] = pd.to_datetime(fd3["Started"], errors="coerce", dayfirst=True)
 fd3["Ended"] = pd.to_datetime(fd3["Ended"], errors="coerce", dayfirst=True)
 
-min_date = fd3["Started"].min().date()
-max_date = fd3["Ended"].max().date()
+# -------------------------
+# Slider for date range
+# -------------------------
+# Convert dates to integers (timestamps) for slider
+fd3["Started_ts"] = fd3["Started"].map(pd.Timestamp.timestamp)
+fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
 
-date_range = st.date_input(
-    "Select date range",
-    value=(min_date, max_date),
-    min_value=min_date,
-    max_value=max_date
+min_ts = int(fd3["Started_ts"].min())
+max_ts = int(fd3["Ended_ts"].max())
+
+range_ts = st.slider(
+    "Select Started–Ended range",
+    min_value=min_ts,
+    max_value=max_ts,
+    value=(min_ts, max_ts),
+    step=86400  # 1 day in seconds
 )
 
-# Filter DataFrame by date range
-filtered_df = fd3[(fd3["Started"].dt.date >= date_range[0]) & 
-                  (fd3["Ended"].dt.date <= date_range[1])]
+# Convert back to datetime
+start_range = pd.to_datetime(range_ts[0], unit="s")
+end_range = pd.to_datetime(range_ts[1], unit="s")
 
-st.write(f"Showing {len(filtered_df)} rows in selected date range: {date_range}")
+# Filter DataFrame
+filtered_df = fd3[(fd3["Started"] >= start_range) & (fd3["Ended"] <= end_range)]
+
+st.write(f"Showing {len(filtered_df)} rows in range: {start_range.date()} to {end_range.date()}")
 
 # -------------------------
-# 3️⃣ Pivot table & heatmap
+# Pivot table & heatmap
 # -------------------------
+# Make Maandjaar ordered
+months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
+          "jul-24", "aug-24", "sep-24", "okt-24", "nov-24", "dec-24"]
+filtered_df["Maandjaar"] = pd.Categorical(filtered_df["Maandjaar"], categories=months, ordered=True)
+
 flights = filtered_df.pivot_table(
     index="bucket",
     columns="Maandjaar",
@@ -94,4 +96,5 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
 
