@@ -123,13 +123,6 @@ if not filtered_df.empty:
 else:
     st.warning("No data found for the selected date range.")
 
-flights2 = filtered_df.pivot_table(
-        index="Started",
-        columns="Started",
-        values="Verbruikte_energie_WH_accuraat",
-        aggfunc="Mean"
-)
-
 if not filtered_df.empty:
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
@@ -156,6 +149,7 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
