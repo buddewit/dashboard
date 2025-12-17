@@ -147,7 +147,7 @@ if not filtered_df.empty:
     filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
     # Plotting
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig2, ax2 = plt.subplots(figsize=(12, 6))
     sns.scatterplot(
         data=filtered_df,
         x="Started",
@@ -156,14 +156,15 @@ if not filtered_df.empty:
         size="Verbruikte energie WH accuraat",
         palette=sns.cubehelix_palette(rot=-.2, as_cmap=True),
         sizes=(10, 200),
-        ax=ax
+        ax=ax2
     )
 
     # Now these commands will actually work!
-    ax.set_ylim(0, 100)
-    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
+    ax2.set_ylim(0, 100)
+    ax2.yaxis.set_major_locator(mticker.MultipleLocator(10))
     
-    st.pyplot(fig)
+    st.pyplot(fig2)
+
 
 
 
