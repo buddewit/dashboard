@@ -136,7 +136,7 @@ if not filtered_df.empty:
     )
 
     # Drop rows with NaNs in key columns
-    filtered_df = filtered_df.dropna(subset=["Started", "bucket", "Verbruikte_energie_WH_accuraat"])
+    filtered_df = filtered_df.dropna(subset=["Started", "bucket", "Verbruikte energie WH accuraat"])
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
 
@@ -160,6 +160,7 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
