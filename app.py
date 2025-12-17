@@ -43,62 +43,63 @@ if name:
 sns.set_theme()
 
 # -------------------------
-# 1️⃣ Load your CSV (from repo or uploaded)
+# 1️⃣ Load and Prepare Data
 # -------------------------
 fd3 = pd.read_csv("fd2.csv", delimiter=";")
 
-# Convert to datetime
+# Ensure columns are datetime
 fd3["Started"] = pd.to_datetime(fd3["Started"], errors="coerce", dayfirst=True)
 fd3["Ended"] = pd.to_datetime(fd3["Ended"], errors="coerce", dayfirst=True)
 
-fd3["Started_ts"] = fd3["Started"].map(pd.Timestamp.timestamp)
-fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
+# Drop NaT values to avoid errors in min/max calculation
+fd3 = fd3.dropna(subset=["Started", "Ended"])
 
 # -------------------------
-# Slider for date range
+# 2️⃣ Slider Logic
 # -------------------------
-# Convert dates to integers (timestamps) for slider
-fd3["Started_ts"] = fd3["Started"].map(pd.Timestamp.timestamp)
-fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
+# Get min and max as Timestamp objects directly from the datetime columns
+min_date = fd3["Started"].min()
+max_date = fd3["Ended"].max()
 
-min_ts = pd.to_datetime(fd3["Started_ts"].min())
-max_ts = pd.to_datetime(fd3["Ended_ts"].max())
-
+# Use the datetime objects directly in the slider
 range_ts = st.slider(
     "Select Started–Ended range",
-    min_value=min_ts,
-    max_value=max_ts,
-    value=(min_ts, max_ts),
-    step=86400  # 1 day in seconds
+    min_value=min_date.to_pydatetime(),
+    max_value=max_date.to_pydatetime(),
+    value=(min_date.to_pydatetime(), max_date.to_pydatetime()),
+    format="DD-MM-YYYY"
 )
 
-# Convert back to datetime
-start_range = pd.to_datetime(range_ts[0], unit="s")
-end_range = pd.to_datetime(range_ts[1], unit="s")
-
-# Filter DataFrame
-filtered_df = fd3[(fd3["Started"] >= start_range) & (fd3["Ended"] <= end_range)]
-
-st.write(f"Showing {len(filtered_df)} rows in range: {start_range.date()} to {end_range.date()}")
+# range_ts is already a tuple of datetime objects, no need to convert with unit="s"
+start_range, end_range = range_ts
 
 # -------------------------
-# Pivot table & heatmap
+# 3️⃣ Filter and Pivot
 # -------------------------
-# Make Maandjaar ordered
+# Filter DataFrame using the slider values
+filtered_df = fd3[(fd3["Started"] >= start_range) & (fd3["Ended"] <= end_range)].copy()
+
+st.write(f"Showing {len(filtered_df)} rows in range: {start_range.strftime('%Y-%m-%d')} to {end_range.strftime('%Y-%m-%d')}")
+
+# Set Categorical order
 months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
           "jul-24", "aug-24", "sep-24", "okt-24", "nov-24", "dec-24"]
 filtered_df["Maandjaar"] = pd.Categorical(filtered_df["Maandjaar"], categories=months, ordered=True)
 
-flights = filtered_df.pivot_table(
-    index="bucket",
-    columns="Maandjaar",
-    values="Started",
-    aggfunc="count"
-)
+# Generate Heatmap
+if not filtered_df.empty:
+    flights = filtered_df.pivot_table(
+        index="bucket",
+        columns="Maandjaar",
+        values="Started",
+        aggfunc="count"
+    )
 
-fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
-sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
-st.pyplot(fig)
+    fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
+    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+    st.pyplot(fig)
+else:
+    st.warning("No data found for the selected date range.")
 
 
 
