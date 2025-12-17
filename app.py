@@ -128,7 +128,6 @@ import matplotlib.ticker as mticker
 
 if not filtered_df.empty:
 
-    # Convert types safely
     filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
     filtered_df["Verbruikte energie WH accuraat"] = (
         filtered_df["Verbruikte energie WH accuraat"]
@@ -136,8 +135,6 @@ if not filtered_df.empty:
         .str.replace(",", ".")
         .astype(float)
     )
-
-    # Drop rows with NaNs in key columns
     filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
@@ -154,23 +151,21 @@ if not filtered_df.empty:
         aspect=2
     )
 
-    g.ax.xaxis.grid(True, "minor", linewidth=.25)
-    g.ax.yaxis.grid(True, "minor", linewidth=.25)
-    g.despine(left=True, bottom=True)
-    g.ax.set_ylim(0, 100)
-    g.ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
+    # Access the actual Axes
+    ax = g.axes[0, 0]
+
+    ax.xaxis.grid(True, "minor", linewidth=.25)
+    ax.yaxis.grid(True, "minor", linewidth=.25)
+    sns.despine(ax=ax, left=True, bottom=True)
+
+    # Force y-axis 0–100
+    ax.set_ylim(0, 100)
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
 
     st.pyplot(g.fig)
 
 else:
     st.warning("No data found for the selected date range.")
-
-
-
-
-
-
-
 
 
 
