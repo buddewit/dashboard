@@ -64,8 +64,8 @@ max_date = fd3["Maxgevraagd(w)"].max()
 # Use the datetime objects directly in the slider
 range_ts = st.slider(
     "Select Started–Ended range",
-    min_value=min_date.(), #to_pydatetime()
-    max_value=max_date.(), #to_pydatetime() 
+    min_value=min_date, #to_pydatetime()
+    max_value=max_date, #to_pydatetime() 
     value=(min_date.to_pydatetime(), max_date.to_pydatetime()),
     format="DD-MM-YYYY"
 )
@@ -100,6 +100,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
