@@ -176,11 +176,12 @@ ax_scatter.set_title("Bezetting over Tijd")
 ax_scatter.set_ylabel("Bezettingsgraad (%)")
 
 # Move the legend outside so it doesn't cover data
-sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.2), ncol=3)
+sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
