@@ -129,6 +129,13 @@ import matplotlib.ticker as mticker
 import seaborn as sns
 
 if not filtered_df.empty:
+    # 1. Clean and convert the y-axis column to float
+    filtered_df["Bezettingsgraad"] = (
+        filtered_df["Bezettingsgraad"]
+        .astype(str)
+        .str.replace(",", ".")
+        .astype(float)
+    )
 
     filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
     filtered_df["Verbruikte energie WH accuraat"] = (
@@ -137,34 +144,17 @@ if not filtered_df.empty:
         .str.replace(",", ".")
         .astype(float)
     )
+    
+    # Drop rows with NaNs to ensure the plot renders correctly
     filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
-    cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
-
+    # ... rest of your plotting code ...
     fig, ax = plt.subplots(figsize=(12, 6))
-    sns.scatterplot(
-        data=filtered_df,
-        x="Started",
-        y="Bezettingsgraad",
-        hue="Verbruikte energie WH accuraat",
-        size="Verbruikte energie WH accuraat",
-        palette=cmap,
-        sizes=(10, 200),
-        ax=ax
-    )
+    sns.scatterplot(...)
 
+    # These lines will now work correctly because the data is numerical
     ax.set_ylim(0, 100)
-    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))  # Ticks every 10
-    ax.yaxis.set_minor_locator(mticker.MultipleLocator(1))   # Optional minor ticks
-    ax.xaxis.grid(True, which="minor", linewidth=.25)
-    ax.yaxis.grid(True, which="minor", linewidth=.25)
-    sns.despine(ax=ax, left=True, bottom=True)
-
-    st.pyplot(fig)
-
-else:
-    st.warning("No data found for the selected date range.")
-
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
 
 
 
