@@ -51,6 +51,9 @@ fd3 = pd.read_csv("fd2.csv", delimiter=";")
 fd3["Started"] = pd.to_datetime(fd3["Started"], errors="coerce", dayfirst=True)
 fd3["Ended"] = pd.to_datetime(fd3["Ended"], errors="coerce", dayfirst=True)
 
+fd3["Started_ts"] = fd3["Started"].map(pd.Timestamp.timestamp)
+fd3["Ended_ts"] = fd3["Ended"].map(pd.Timestamp.timestamp)
+
 # -------------------------
 # Slider for date range
 # -------------------------
@@ -96,5 +99,6 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
 
 
