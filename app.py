@@ -123,6 +123,9 @@ if not filtered_df.empty:
 else:
     st.warning("No data found for the selected date range.")
 
+
+import matplotlib.ticker as mticker
+
 if not filtered_df.empty:
 
     # Convert types safely
@@ -161,6 +164,7 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
