@@ -75,12 +75,12 @@ sns.set_theme()
 # -------------------------
 
 if option == 'Laadpaalmap':
+
+    st.subtitle("⚡ EV Charging Stations Dashboard")
     
     df_muni = pd.read_csv("df_muni.csv", delimiter=";")
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
 
-    st.subtitle("⚡ EV Charging Stations Dashboard")
-    
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
     
@@ -258,6 +258,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
