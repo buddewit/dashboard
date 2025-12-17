@@ -130,15 +130,14 @@ flights2 = filtered_df.pivot_table(
         aggfunc="Mean"
 )
 
-# Only if filtered_df is not empty
 if not filtered_df.empty:
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
 
-    # relplot directly on filtered_df
+    # relplot directly on the long-form filtered_df
     g = sns.relplot(
         data=filtered_df,
-        x="Started",
+        x="Started", 
         y="bucket",
         hue="Verbruikte_energie_WH_accuraat",
         size="Verbruikte_energie_WH_accuraat",
@@ -148,27 +147,15 @@ if not filtered_df.empty:
         aspect=2
     )
 
-    # Optional: scales
-    g.set(xscale="log", yscale="linear")  # or "log" if needed
+    g.set(xscale="linear", yscale="linear")  # adjust scales if needed
     g.ax.xaxis.grid(True, "minor", linewidth=.25)
     g.ax.yaxis.grid(True, "minor", linewidth=.25)
     g.despine(left=True, bottom=True)
 
-    # Display in Streamlit
     st.pyplot(g.fig)
 
 else:
     st.warning("No data found for the selected date range.")
-
-
-
-
-
-
-
-
-
-
 
 
 
