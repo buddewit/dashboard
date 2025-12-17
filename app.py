@@ -127,7 +127,6 @@ if not filtered_df.empty:
 
     # Convert types safely
     filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
-    filtered_df["bucket"] = filtered_df["bucket"].astype(str)
     filtered_df["Verbruikte energie WH accuraat"] = (
         filtered_df["Verbruikte energie WH accuraat"]
         .astype(str)
@@ -136,14 +135,14 @@ if not filtered_df.empty:
     )
 
     # Drop rows with NaNs in key columns
-    filtered_df = filtered_df.dropna(subset=["Started", "bucket", "Verbruikte energie WH accuraat"])
+    filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
 
     g = sns.relplot(
         data=filtered_df,
         x="Started",
-        y="bucket",
+        y="Bezettingsgraad",
         hue="Verbruikte energie WH accuraat",
         size="Verbruikte energie WH accuraat",
         palette=cmap,
@@ -160,6 +159,7 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
