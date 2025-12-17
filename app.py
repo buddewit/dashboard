@@ -81,7 +81,6 @@ start_range, end_range = range_ts
 # 3️⃣ Filter and Pivot
 # -------------------------
 # Filter DataFrame using the slider values
-filtered_df = fd3[(fd3["Maxgevraagd(w)"] >= start_range) & (fd3["Maxgevraagd(w)"] <= end_range) & (fd3["hour"] >= start_range2) & (fd3["hour"] <= end_range2) ].copy()
 
 st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
 
@@ -94,6 +93,12 @@ range_ts2 = st.slider(
 )
 
 start_range2, end_range2 = range_ts2
+
+filtered_df = fd3[
+    (fd3["Maxgevraagd(w)"] >= start_range) & 
+    (fd3["Maxgevraagd(w)"] <= end_range) & 
+    (fd3["hour"] >= start_range2) & 
+    (fd3["hour"] <= end_range2)].copy()
 
 st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
 
@@ -116,6 +121,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
