@@ -259,9 +259,10 @@ elif option == 'Laadpaaldata':
     
     st.pyplot(fig_scatter)
 
-elif option == 'Elektrische autos':
-
+###elif option == 'Elektrische autos':
+###
 # --- RENDER --
+
 
 
 
