@@ -9,6 +9,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+st.sidebar:
+    st.title('🏂 US Population Dashboard')
+
 # Set the title
 st.title('Hello Streamlit!')
 
@@ -187,6 +190,7 @@ sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
