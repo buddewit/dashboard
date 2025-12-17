@@ -1,4 +1,7 @@
-pip install -r requirements.txt
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Set the title
 st.title('Hello Streamlit!')
@@ -75,6 +78,7 @@ flights = filtered_df.pivot_table(
 fig, ax = plt.subplots(figsize=(12, 6))
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 st.pyplot(fig)
+
 
 
 
