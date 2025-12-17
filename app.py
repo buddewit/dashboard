@@ -74,58 +74,58 @@ sns.set_theme()
 # -------------------------
 
 if option == 'Laadpaalmap':
-df_muni = pd.read_csv("df_muni.csv", delimiter=";")
-gpd_points = pd.read_csv("gpd_points.csv", delimiter=";")
-# Page config
-st.set_page_config(page_title="Charging Stations Map", layout="wide")
-
-st.title("⚡ EV Charging Stations Dashboard")
-
-# Assuming you have your dataframes loaded:
-# gdf_munis, df_muni, df3
-
-# Base map
-m = folium.Map(location=[52.1, 5.3], zoom_start=8)
-
-# Choropleth layer
-folium.Choropleth(
-    geo_data=gdf_munis,       # full GeoDataFrame with geometry
-    data=df_muni,              # your dataset
-    columns=['province', 'avg_power'],
-    key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
-    fill_color='BuPu',
-    fill_opacity=0.7,
-    line_opacity=0.3,
-    legend_name='avg_power'
-).add_to(m)
-
-# Marker cluster
-marker_cluster = MarkerCluster().add_to(m)
-
-for _, row in df3.iterrows():
-    tooltip = (
-        f"Postcode: {row['AddressInfo.Postcode']}<br>"
-        f"Town: {row['AddressInfo.Town']}<br>"
-        "Click for more"
-    )
-
-    popup = f"""
-    <i>Power KW:</i> <br> <b>{row['Conn_PowerKW']}</b> <br>
-    <i>Connection type:</i> <br> <b>{row['Conn_ConnectionType.Title']}</b> <br>
-    <i>Current type:</i> <br> <b>{row['Conn_CurrentType.Title']}</b> <br>
-    """
-
-    folium.CircleMarker(
-        location=[row["AddressInfo.Latitude"], row["AddressInfo.Longitude"]],
-        radius=4,
-        fill=True,
-        fill_opacity=0.8,
-        tooltip=tooltip,
-        popup=popup
-    ).add_to(marker_cluster)
-
-# Display the map in Streamlit
-st_folium(m, width=1400, height=600)
+    df_muni = pd.read_csv("df_muni.csv", delimiter=";")
+    gpd_points = pd.read_csv("gpd_points.csv", delimiter=";")
+    # Page config
+    st.set_page_config(page_title="Charging Stations Map", layout="wide")
+    
+    st.title("⚡ EV Charging Stations Dashboard")
+    
+    # Assuming you have your dataframes loaded:
+    # gdf_munis, df_muni, df3
+    
+    # Base map
+    m = folium.Map(location=[52.1, 5.3], zoom_start=8)
+    
+    # Choropleth layer
+    folium.Choropleth(
+        geo_data=gdf_munis,       # full GeoDataFrame with geometry
+        data=df_muni,              # your dataset
+        columns=['province', 'avg_power'],
+        key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
+        fill_color='BuPu',
+        fill_opacity=0.7,
+        line_opacity=0.3,
+        legend_name='avg_power'
+    ).add_to(m)
+    
+    # Marker cluster
+    marker_cluster = MarkerCluster().add_to(m)
+    
+    for _, row in df3.iterrows():
+        tooltip = (
+            f"Postcode: {row['AddressInfo.Postcode']}<br>"
+            f"Town: {row['AddressInfo.Town']}<br>"
+            "Click for more"
+        )
+    
+        popup = f"""
+        <i>Power KW:</i> <br> <b>{row['Conn_PowerKW']}</b> <br>
+        <i>Connection type:</i> <br> <b>{row['Conn_ConnectionType.Title']}</b> <br>
+        <i>Current type:</i> <br> <b>{row['Conn_CurrentType.Title']}</b> <br>
+        """
+    
+        folium.CircleMarker(
+            location=[row["AddressInfo.Latitude"], row["AddressInfo.Longitude"]],
+            radius=4,
+            fill=True,
+            fill_opacity=0.8,
+            tooltip=tooltip,
+            popup=popup
+        ).add_to(marker_cluster)
+    
+    # Display the map in Streamlit
+    st_folium(m, width=1400, height=600)
 
 elif option == 'Laadpaaldata':
     
@@ -266,6 +266,7 @@ st.pyplot(fig_scatter)
 elif option == 'Elektrische autos':
 
 # --- RENDER --
+
 
 
 
