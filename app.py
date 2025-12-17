@@ -80,18 +80,15 @@ if option == 'Laadpaalmap':
 
     st.subtitle("⚡ EV Charging Stations Dashboard")
     
-    # Assuming you have your dataframes loaded:
-    # gdf_munis, df_muni
-    
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
     
     # Choropleth layer
     folium.Choropleth(
-        geo_data=gdf_munis,       # full GeoDataFrame with geometry
+        geo_data=gdf_points,       # full GeoDataFrame with geometry
         data=df_muni,              # your dataset
         columns=['province', 'avg_power'],
-        key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
+        key_on='feature.properties.province',  # depends on your GeoJSON property
         fill_color='BuPu',
         fill_opacity=0.7,
         line_opacity=0.3,
@@ -260,6 +257,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
