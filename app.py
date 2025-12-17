@@ -125,12 +125,24 @@ else:
 
 if not filtered_df.empty:
 
+    # Convert types safely
+    filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
+    filtered_df["bucket"] = filtered_df["bucket"].astype(str)
+    filtered_df["Verbruikte_energie_WH_accuraat"] = (
+        filtered_df["Verbruikte_energie_WH_accuraat"]
+        .astype(str)
+        .str.replace(",", ".")
+        .astype(float)
+    )
+
+    # Drop rows with NaNs in key columns
+    filtered_df = filtered_df.dropna(subset=["Started", "bucket", "Verbruikte_energie_WH_accuraat"])
+
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
 
-    # relplot directly on the long-form filtered_df
     g = sns.relplot(
         data=filtered_df,
-        x="Started", 
+        x="Started",
         y="bucket",
         hue="Verbruikte_energie_WH_accuraat",
         size="Verbruikte_energie_WH_accuraat",
@@ -140,7 +152,6 @@ if not filtered_df.empty:
         aspect=2
     )
 
-    g.set(xscale="linear", yscale="linear")  # adjust scales if needed
     g.ax.xaxis.grid(True, "minor", linewidth=.25)
     g.ax.yaxis.grid(True, "minor", linewidth=.25)
     g.despine(left=True, bottom=True)
@@ -149,8 +160,6 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
-
-
 
 
 
