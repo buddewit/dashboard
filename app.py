@@ -60,6 +60,28 @@ fd3["Maandjaar"] = pd.Categorical(fd3["Maandjaar"], categories=months, ordered=T
 # 2️⃣ Optional: filter buckets
 # -------------------------
 st.title("Started Heatmap Dashboard")
+
+# Make sure Started and Ended are numeric
+fd3["Started"] = pd.to_numeric(fd3["Started"], errors="coerce").fillna(0)
+fd3["Ended"] = pd.to_numeric(fd3["Ended"], errors="coerce").fillna(0)
+
+# Determine min and max values for the slider
+min_value = int(fd3["Started"].min())
+max_value = int(fd3["Ended"].max())
+
+# Slider for range selection
+range_values = st.slider(
+    "Select Started–Ended range",
+    min_value=min_value,
+    max_value=max_value,
+    value=(min_value, max_value)
+)
+
+# Filter DataFrame based on slider
+filtered_df = fd3[(fd3["Started"] >= range_values[0]) & (fd3["Ended"] <= range_values[1])]
+
+st.write(f"Showing {len(filtered_df)} rows in selected range: {range_values}")
+
 buckets = fd3["bucket"].unique()
 selected_buckets = st.multiselect("Select buckets", options=buckets, default=buckets)
 filtered_df = fd3[fd3["bucket"].isin(selected_buckets)]
@@ -82,6 +104,7 @@ sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 
 # Display in Streamlit
 st.pyplot(fig)
+
 
 
 
