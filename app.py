@@ -179,22 +179,6 @@ ax_scatter.set_ylabel("Bezettingsgraad (%)")
 sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
 st.pyplot(fig_scatter)
 
-# --- RENDER --
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.subheader("Heatmap")
-    st.pyplot(fig_heat)
-
-with col2:
-    st.subheader("Scatterplot")
-    st.pyplot(fig_scatter)
-
-
-
-
-
 
 
 
