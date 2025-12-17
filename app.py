@@ -61,9 +61,12 @@ fd3 = fd3.dropna(subset=["Started", "Ended"])
 min_date = fd3["Maxgevraagd(w)"].min()
 max_date = fd3["Maxgevraagd(w)"].max()
 
+min_date2 = fd3["hour"].min()
+max_date2 = fd3["hour"].max()
+
 # Use the datetime objects directly in the slider
 range_ts = st.slider(
-    "Select Started–Ended range",
+    "Selecteer minimale tot maximale stroomtoevoer (w)",
     min_value=min_date, #to_pydatetime()
     max_value=max_date, #to_pydatetime() 
     value=(min_date, max_date)
@@ -72,14 +75,22 @@ range_ts = st.slider(
 
 # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
 start_range, end_range = range_ts
-
+start_range2, end_range2 = range_ts2
 # -------------------------
 # 3️⃣ Filter and Pivot
 # -------------------------
 # Filter DataFrame using the slider values
-filtered_df = fd3[(fd3["Maxgevraagd(w)"] >= start_range) & (fd3["Maxgevraagd(w)"] <= end_range)].copy()
+filtered_df = fd3[(fd3["Maxgevraagd(w)"] >= start_range) & (fd3["Maxgevraagd(w)"] <= end_range) & fd3[(fd3["hour"] >= start_range2) & (fd3["hour"] <= end_range2) ].copy()
 
 st.write(f"Showing {len(filtered_df)} rows in range: {start_range} to {end_range}") #strftime('%Y-%m-%d')
+
+range_ts2 = st.slider(
+    "Selecteer tijdstip op de dag",
+    min_value=min_date2, #to_pydatetime()
+    max_value=max_date2, #to_pydatetime() 
+    value=(min_date2, max_date2)
+    #format="DD-MM-YYYY"
+)
 
 # Set Categorical order
 months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
@@ -100,6 +111,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
