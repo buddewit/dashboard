@@ -83,7 +83,7 @@ if option == 'Laadpaalmap':
     gdf_munis = pd.read_csv("gdf_munis.csv", delimiter=",")
 
     gdf_munis_clean = gdf_munis.dropna(subset=['geometry']).copy()
-    gdf_munis_clean = gdf_munis_clean[~gdf_munis_clean.geometry.is_empty]
+    gdf_munis_clean = gdf_munis_clean[~gdf_munis_clean.geometry.is_empty()]
 
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
@@ -262,6 +262,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
