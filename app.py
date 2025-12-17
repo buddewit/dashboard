@@ -28,7 +28,7 @@ st.markdown(
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
     option = ['Laadpaalmap','Laadpaaldata','Elektrische autos']
-    selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
+    selected_color_theme = st.selectbox('Select a color theme', option)
 
 # Set the title
 st.title('Hello Streamlit!')
@@ -266,6 +266,7 @@ st.pyplot(fig_scatter)
 elif option == 'Elektrische autos':
 
 # --- RENDER --
+
 
 
 
