@@ -83,10 +83,10 @@ if option == 'Laadpaalmap':
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
     gdf_munis = pd.read_csv("gdf_munis.csv", delimiter=",")
      
-    gdf_munis_df['geometry'] = gdf_munis_df['geometry'].apply(wkt.loads)
+    gdf_munis['geometry'] = gdf_munis_df['geometry'].apply(wkt.loads)
     
     # Convert to GeoDataFrame
-    gdf_munis = gpd.GeoDataFrame(gdf_munis_df, geometry='geometry', crs="EPSG:4326")
+    gdf_munis = gpd.GeoDataFrame(gdf_munis, geometry='geometry', crs="EPSG:4326")
 
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
@@ -265,6 +265,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
