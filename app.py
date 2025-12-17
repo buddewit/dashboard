@@ -148,7 +148,7 @@ df_plot = df_plot.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energ
 
 # --- PLOTTING PHASE ---
 # Create a brand new figure and axis object
-fig_scatter, ax_scatter = plt.subplots(figsize=(15, 8), dpi=150)
+fig_scatter, ax_scatter = plt.subplots(figsize=(20, 12), dpi=150)
 
 # Set the style to ensure the grid is visible
 sns.set_style("whitegrid")
@@ -180,6 +180,7 @@ sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
 
 # --- RENDER ---
 st.pyplot(fig_scatter)
+
 
 
 
