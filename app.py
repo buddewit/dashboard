@@ -7,6 +7,7 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import matplotlib.ticker as mticker
 from shapely import wkt
+import geopandas as gpd
 
 st.set_page_config(
     page_title="US Population Dashboard",
@@ -265,6 +266,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
