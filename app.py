@@ -81,7 +81,7 @@ if option == 'Laadpaalmap':
     st.subtitle("⚡ EV Charging Stations Dashboard")
     
     # Assuming you have your dataframes loaded:
-    # gdf_munis, df_muni, df3
+    # gdf_munis, df_muni
     
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
@@ -101,7 +101,7 @@ if option == 'Laadpaalmap':
     # Marker cluster
     marker_cluster = MarkerCluster().add_to(m)
     
-    for _, row in df3.iterrows():
+    for _, row in gdf_points.iterrows():
         tooltip = (
             f"Postcode: {row['AddressInfo.Postcode']}<br>"
             f"Town: {row['AddressInfo.Town']}<br>"
@@ -260,6 +260,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
