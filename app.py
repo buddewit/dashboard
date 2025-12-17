@@ -6,6 +6,7 @@ import folium
 from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import matplotlib.ticker as mticker
+from shapely import wkt
 
 st.set_page_config(
     page_title="US Population Dashboard",
@@ -81,9 +82,11 @@ if option == 'Laadpaalmap':
     df_muni = pd.read_csv("df_muni.csv", delimiter=",")
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
     gdf_munis = pd.read_csv("gdf_munis.csv", delimiter=",")
-
-    gdf_munis_clean = gdf_munis.dropna(subset=['geometry']).copy()
-    gdf_munis_clean = gdf_munis_clean[~gdf_munis_clean.geometry.is_empty()]
+     
+    gdf_munis_df['geometry'] = gdf_munis_df['geometry'].apply(wkt.loads)
+    
+    # Convert to GeoDataFrame
+    gdf_munis = gpd.GeoDataFrame(gdf_munis_df, geometry='geometry', crs="EPSG:4326")
 
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
@@ -262,6 +265,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
