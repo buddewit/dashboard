@@ -123,6 +123,63 @@ if not filtered_df.empty:
 else:
     st.warning("No data found for the selected date range.")
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import matplotlib.ticker as mticker
+
+# --- CLEANING PHASE ---
+# 1. Work on a fresh copy so we don't mess up your heatmap data
+df_plot = filtered_df.copy()
+
+# 2. Force conversion of everything to numbers (Standardizing commas/strings)
+cols_to_fix = ["Bezettingsgraad", "Verbruikte energie WH accuraat"]
+for col in cols_to_fix:
+    df_plot[col] = pd.to_numeric(
+        df_plot[col].astype(str).str.replace(",", "."), 
+        errors="coerce"
+    )
+
+# 3. Ensure date is correct
+df_plot["Started"] = pd.to_datetime(df_plot["Started"], errors="coerce")
+
+# 4. Drop any rows that failed conversion (this is vital for the axis to stay numerical)
+df_plot = df_plot.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
+
+# --- PLOTTING PHASE ---
+# Create a brand new figure and axis object
+fig_scatter, ax_scatter = plt.subplots(figsize=(12, 6))
+
+# Set the style to ensure the grid is visible
+sns.set_style("whitegrid")
+
+sns.scatterplot(
+    data=df_plot,
+    x="Started",
+    y="Bezettingsgraad",
+    hue="Verbruikte energie WH accuraat",
+    size="Verbruikte energie WH accuraat",
+    palette="viridis", # Using a standard palette first to ensure it works
+    sizes=(20, 200),
+    ax=ax_scatter
+)
+
+# --- AXIS ENFORCEMENT ---
+# Explicitly set the limits (0 to 100)
+ax_scatter.set_ylim(0, 100)
+
+# Explicitly set the ticks (0, 10, 20... 100)
+ax_scatter.set_yticks(range(0, 101, 10))
+
+# Clean up labels
+ax_scatter.set_title("Bezetting over Tijd")
+ax_scatter.set_ylabel("Bezettingsgraad (%)")
+
+# Move the legend outside so it doesn't cover data
+sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
+
+# --- RENDER ---
+st.pyplot(fig_scatter)
 
 
 
