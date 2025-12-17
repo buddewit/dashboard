@@ -154,12 +154,13 @@ if not filtered_df.empty:
     g.ax.xaxis.grid(True, "minor", linewidth=.25)
     g.ax.yaxis.grid(True, "minor", linewidth=.25)
     g.despine(left=True, bottom=True)
-    g.ax.set_xticks(range(0, 101, 10))
+    g.ax.set_yticks(range(0, 101, 10))
 
     st.pyplot(g.fig)
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
