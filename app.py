@@ -74,8 +74,8 @@ range_ts = st.slider(
 )
 range_ts2 = st.slider(
     "Selecteer tijdstip start laden",
-    min_value=min_date2, #to_pydatetime()
-    max_value=max_date2, #to_pydatetime() 
+    min_value=min_date2 & "uur", #to_pydatetime()
+    max_value=max_date2 & "uur", #to_pydatetime() 
     value=(min_date2, max_date2)
     #format="DD-MM-YYYY"
 )
@@ -120,6 +120,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
