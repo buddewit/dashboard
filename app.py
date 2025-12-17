@@ -28,8 +28,8 @@ st.markdown(
 
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
-    option = ['Laadpaalmap','Laadpaaldata','Elektrische autos']
-    selected_color_theme = st.selectbox('Select a color theme', option)
+    option = st.selectbox('Selecteer een weergave', 
+                         ['Laadpaalmap', 'Laadpaaldata', 'Elektrische autos'])
 
 # Set the title
 st.title('Hello Streamlit!')
@@ -77,10 +77,8 @@ sns.set_theme()
 if option == 'Laadpaalmap':
     df_muni = pd.read_csv("df_muni.csv", delimiter=";")
     gpd_points = pd.read_csv("gpd_points.csv", delimiter=";")
-    # Page config
-    st.set_page_config(page_title="Charging Stations Map", layout="wide")
-    
-    st.title("⚡ EV Charging Stations Dashboard")
+
+    st.subtitle("⚡ EV Charging Stations Dashboard")
     
     # Assuming you have your dataframes loaded:
     # gdf_munis, df_muni, df3
@@ -262,6 +260,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
