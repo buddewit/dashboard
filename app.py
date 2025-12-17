@@ -66,7 +66,7 @@ max_date2 = fd3["hour"].max()
 
 # Use the datetime objects directly in the slider
 range_ts = st.slider(
-    "Selecteer minimale tot maximale stroomtoevoer (w)",
+    "Selecteer minimale tot maximale stroomtoevoer van laadpaal (w)",
     min_value=min_date, #to_pydatetime()
     max_value=max_date, #to_pydatetime() 
     value=(min_date, max_date)
@@ -120,6 +120,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
