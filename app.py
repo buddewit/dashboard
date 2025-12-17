@@ -74,11 +74,13 @@ range_ts = st.slider(
 )
 range_ts2 = st.slider(
     "Selecteer tijdstip start laden",
-    min_value=min_date2 & "uur", #to_pydatetime()
-    max_value=max_date2 & "uur", #to_pydatetime() 
-    value=(min_date2, max_date2)
-    #format="DD-MM-YYYY"
+    min_value=int(min_date2),
+    max_value=int(max_date2),
+    value=(int(min_date2), int(max_date2)),
+    step=1,
+    format="%d uur"
 )
+
 
 # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
 start_range, end_range = range_ts
@@ -120,6 +122,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
