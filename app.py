@@ -82,12 +82,15 @@ if option == 'Laadpaalmap':
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
     gdf_munis = pd.read_csv("gdf_munis.csv", delimiter=",")
 
+    gdf_munis_clean = gdf_munis.dropna(subset=['geometry']).copy()
+    gdf_munis_clean = gdf_munis_clean[~gdf_munis_clean.geometry.is_empty]
+
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
     
     # Choropleth layer
     folium.Choropleth(
-        geo_data=gdf_munis,       # full GeoDataFrame with geometry
+        geo_data=gdf_munis_clean,       # full GeoDataFrame with geometry
         data=df_muni,              # your dataset
         columns=['province', 'avg_power'],
         key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
@@ -259,6 +262,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
