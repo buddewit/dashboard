@@ -78,7 +78,7 @@ if option == 'Laadpaalmap':
 
     st.title("⚡ EV Charging Stations Dashboard")
     
-    df_muni = pd.read_csv("df_muni.csv", delimiter=";")
+    df_muni = pd.read_csv("df_muni.csv", delimiter=",")
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
     gdf_munis = pd.read_csv("gdf_munis.csv", delimiter=",")
 
@@ -259,6 +259,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
