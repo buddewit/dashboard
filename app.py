@@ -9,6 +9,19 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+st.markdown(
+    """
+    <style>
+    .block-container {
+        max-width: 1200px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
     color_theme_list = ['blues', 'cividis', 'greens', 'inferno', 'magma', 'plasma', 'reds', 'rainbow', 'turbo', 'viridis']
@@ -192,6 +205,7 @@ sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
