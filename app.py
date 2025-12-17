@@ -73,7 +73,7 @@ sns.set_theme()
 # 1️⃣ Load and Prepare Data
 # -------------------------
 
-if option == 'Laadpaalmap'
+if option == 'Laadpaalmap':
 df_muni = pd.read_csv("df_muni.csv", delimiter=";")
 gpd_points = pd.read_csv("gpd_points.csv", delimiter=";")
 # Page config
@@ -266,6 +266,7 @@ st.pyplot(fig_scatter)
 elif option == 'Elektrische autos':
 
 # --- RENDER --
+
 
 
 
