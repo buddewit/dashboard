@@ -128,8 +128,8 @@ if not filtered_df.empty:
     # Convert types safely
     filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
     filtered_df["bucket"] = filtered_df["bucket"].astype(str)
-    filtered_df["Verbruikte_energie_WH_accuraat"] = (
-        filtered_df["Verbruikte_energie_WH_accuraat"]
+    filtered_df["Verbruikte energie WH accuraat"] = (
+        filtered_df["Verbruikte energie WH accuraat"]
         .astype(str)
         .str.replace(",", ".")
         .astype(float)
@@ -144,8 +144,8 @@ if not filtered_df.empty:
         data=filtered_df,
         x="Started",
         y="bucket",
-        hue="Verbruikte_energie_WH_accuraat",
-        size="Verbruikte_energie_WH_accuraat",
+        hue="Verbruikte energie WH accuraat",
+        size="Verbruikte energie WH accuraat",
         palette=cmap,
         sizes=(10, 200),
         height=6,
@@ -160,6 +160,7 @@ if not filtered_df.empty:
 
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
