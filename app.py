@@ -201,9 +201,9 @@ elif option == 'Laadpaaldata':
             aggfunc="count"
         )
     
-        fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
-        sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
-        st.pyplot(fig)
+    fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
+    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+    st.pyplot(fig)
 
 
 
@@ -262,6 +262,7 @@ elif option == 'Laadpaaldata':
 elif option == 'Elektrische autos':
 
 # --- RENDER --
+
 
 
 
