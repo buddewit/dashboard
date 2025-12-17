@@ -90,7 +90,7 @@ if option == 'Laadpaalmap':
         geo_data=gdf_munis,       # full GeoDataFrame with geometry
         data=df_muni,              # your dataset
         columns=['province', 'avg_power'],
-        key_on='feature.properties.NAME2',  # depends on your GeoJSON property
+        key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
         fill_color='BuPu',
         fill_opacity=0.7,
         line_opacity=0.3,
@@ -259,6 +259,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
