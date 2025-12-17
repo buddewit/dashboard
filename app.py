@@ -166,7 +166,7 @@ sns.scatterplot(
 
 # --- AXIS ENFORCEMENT ---
 # Explicitly set the limits (0 to 100)
-ax_scatter.set_ylim(0, 100)
+ax_scatter.set_ylim(-2, 102)
 
 # Explicitly set the ticks (0, 10, 20... 100)
 ax_scatter.set_yticks(range(0, 101, 10))
@@ -180,6 +180,7 @@ sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
 
 # --- RENDER ---
 st.pyplot(fig_scatter)
+
 
 
 
