@@ -127,29 +127,30 @@ else:
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import seaborn as sns
-
 if not filtered_df.empty:
-    # Handle the Y-axis (Bezettingsgraad)
-    filtered_df["Bezettingsgraad"] = pd.to_numeric(
-        filtered_df["Bezettingsgraad"].astype(str).str.replace(",", "."), 
+    # 1. Force a copy to avoid internal pandas reference issues
+    plot_df = filtered_df.copy()
+
+    # 2. Convert to numeric using .loc to be safe
+    plot_df["Bezettingsgraad"] = pd.to_numeric(
+        plot_df["Bezettingsgraad"].astype(str).str.replace(",", "."), 
         errors="coerce"
     )
 
-    # Handle the Bubble Size (Energy)
-    filtered_df["Verbruikte energie WH accuraat"] = pd.to_numeric(
-        filtered_df["Verbruikte energie WH accuraat"].astype(str).str.replace(",", "."), 
+    plot_df["Verbruikte energie WH accuraat"] = pd.to_numeric(
+        plot_df["Verbruikte energie WH accuraat"].astype(str).str.replace(",", "."), 
         errors="coerce"
     )
 
-    filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
+    plot_df["Started"] = pd.to_datetime(plot_df["Started"], errors="coerce")
     
-    # Clean up any conversion errors
-    filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
+    # 3. Drop NaNs from the new copy
+    plot_df = plot_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
-    # Plotting
+    # 4. Plotting using the new plot_df
     fig2, ax2 = plt.subplots(figsize=(12, 6))
     sns.scatterplot(
-        data=filtered_df,
+        data=plot_df,  # Use the cleaned copy here
         x="Started",
         y="Bezettingsgraad",
         hue="Verbruikte energie WH accuraat",
@@ -159,12 +160,12 @@ if not filtered_df.empty:
         ax=ax2
     )
 
-    # Now these commands will actually work!
+    # 5. Force the axis strictly
     ax2.set_ylim(0, 100)
-    ax2.yaxis.set_major_locator(mticker.MultipleLocator(10))
+    # Manual override for ticks if MultipleLocator fails
+    ax2.set_yticks(range(0, 110, 10)) 
     
     st.pyplot(fig2)
-
 
 
 
