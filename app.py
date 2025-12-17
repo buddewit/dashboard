@@ -119,6 +119,7 @@ if not filtered_df.empty:
 
     fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
     sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+    st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
 
@@ -162,6 +163,7 @@ sns.scatterplot(
     sizes=(20, 200),
     ax=ax_scatter
 )
+st.pyplot(fig_scatter)
 
 # --- AXIS ENFORCEMENT ---
 # Explicitly set the limits (0 to 100)
@@ -188,6 +190,7 @@ with col1:
 with col2:
     st.subheader("Scatterplot")
     st.pyplot(fig_scatter)
+
 
 
 
