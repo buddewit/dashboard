@@ -163,7 +163,6 @@ sns.scatterplot(
     sizes=(20, 200),
     ax=ax_scatter
 )
-st.pyplot(fig_scatter)
 
 # --- AXIS ENFORCEMENT ---
 # Explicitly set the limits (0 to 100)
@@ -179,7 +178,10 @@ ax_scatter.set_ylabel("Bezettingsgraad (%)")
 # Move the legend outside so it doesn't cover data
 sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
 
+st.pyplot(fig_scatter)
+
 # --- RENDER --
+
 
 
 
