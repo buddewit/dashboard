@@ -94,7 +94,7 @@ if option == 'Laadpaalmap':
     
     # Choropleth layer
     folium.Choropleth(
-        geo_data=gdf_munis_clean,       # full GeoDataFrame with geometry
+        geo_data=gdf_munis,       # full GeoDataFrame with geometry
         data=df_muni,              # your dataset
         columns=['province', 'avg_power'],
         key_on='feature.properties.NAME_2',  # depends on your GeoJSON property
@@ -266,6 +266,7 @@ elif option == 'Laadpaaldata':
 ###elif option == 'Elektrische autos':
 ###
 # --- RENDER --
+
 
 
 
