@@ -77,11 +77,12 @@ flights = filtered_df.pivot_table(
 # -------------------------
 # 4️⃣ Plot heatmap
 # -------------------------
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
 sns.heatmap(flights, annot=True, fmt="d", linewidths=.5, cmap="YlGnBu", ax=ax)
 
 # Display in Streamlit
 st.pyplot(fig)
+
 
 
 
