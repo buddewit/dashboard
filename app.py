@@ -129,33 +129,41 @@ import matplotlib.ticker as mticker
 import seaborn as sns
 
 if not filtered_df.empty:
-    # 1. Clean and convert the y-axis column to float
-    filtered_df["Bezettingsgraad"] = (
-        filtered_df["Bezettingsgraad"]
-        .astype(str)
-        .str.replace(",", ".")
-        .astype(float)
+    # Handle the Y-axis (Bezettingsgraad)
+    filtered_df["Bezettingsgraad"] = pd.to_numeric(
+        filtered_df["Bezettingsgraad"].astype(str).str.replace(",", "."), 
+        errors="coerce"
+    )
+
+    # Handle the Bubble Size (Energy)
+    filtered_df["Verbruikte energie WH accuraat"] = pd.to_numeric(
+        filtered_df["Verbruikte energie WH accuraat"].astype(str).str.replace(",", "."), 
+        errors="coerce"
     )
 
     filtered_df["Started"] = pd.to_datetime(filtered_df["Started"], errors="coerce")
-    filtered_df["Verbruikte energie WH accuraat"] = (
-        filtered_df["Verbruikte energie WH accuraat"]
-        .astype(str)
-        .str.replace(",", ".")
-        .astype(float)
-    )
     
-    # Drop rows with NaNs to ensure the plot renders correctly
+    # Clean up any conversion errors
     filtered_df = filtered_df.dropna(subset=["Started", "Bezettingsgraad", "Verbruikte energie WH accuraat"])
 
-    # ... rest of your plotting code ...
+    # Plotting
     fig, ax = plt.subplots(figsize=(12, 6))
-    sns.scatterplot(...)
+    sns.scatterplot(
+        data=filtered_df,
+        x="Started",
+        y="Bezettingsgraad",
+        hue="Verbruikte energie WH accuraat",
+        size="Verbruikte energie WH accuraat",
+        palette=sns.cubehelix_palette(rot=-.2, as_cmap=True),
+        sizes=(10, 200),
+        ax=ax
+    )
 
-    # These lines will now work correctly because the data is numerical
+    # Now these commands will actually work!
     ax.set_ylim(0, 100)
     ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
-
+    
+    st.pyplot(fig)
 
 
 
