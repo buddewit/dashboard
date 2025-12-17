@@ -27,19 +27,6 @@ with st.sidebar:
     color_theme_list = ['blues', 'cividis', 'greens', 'inferno', 'magma', 'plasma', 'reds', 'rainbow', 'turbo', 'viridis']
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
 
-dataset_choice = st.sidebar.radio(
-    "Select Dataset",
-    ("Dataset 1", "Dataset 2", "Dataset 3")
-)
-
-# Choose dataframe based on selection
-if dataset_choice == "Dataset 1":
-    df = df1
-elif dataset_choice == "Dataset 2":
-    df = df2
-else:
-    df = df3
-
 # Set the title
 st.title('Hello Streamlit!')
 
@@ -218,6 +205,7 @@ sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
 st.pyplot(fig_scatter)
 
 # --- RENDER --
+
 
 
 
