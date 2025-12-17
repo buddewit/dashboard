@@ -66,8 +66,8 @@ range_ts = st.slider(
     "Select Started–Ended range",
     min_value=min_date, #to_pydatetime()
     max_value=max_date, #to_pydatetime() 
-    value=(min_date, max_date),
-    format="DD-MM-YYYY"
+    value=(min_date, max_date)
+    #format="DD-MM-YYYY"
 )
 
 # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
@@ -100,6 +100,7 @@ if not filtered_df.empty:
     st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
+
 
 
 
