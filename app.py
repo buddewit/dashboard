@@ -124,7 +124,9 @@ else:
     st.warning("No data found for the selected date range.")
 
 
+import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
+import seaborn as sns
 
 if not filtered_df.empty:
 
@@ -139,7 +141,8 @@ if not filtered_df.empty:
 
     cmap = sns.cubehelix_palette(rot=-.2, as_cmap=True)
 
-    g = sns.relplot(
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.scatterplot(
         data=filtered_df,
         x="Started",
         y="Bezettingsgraad",
@@ -147,26 +150,20 @@ if not filtered_df.empty:
         size="Verbruikte energie WH accuraat",
         palette=cmap,
         sizes=(10, 200),
-        height=6,
-        aspect=2
+        ax=ax
     )
 
-    # Access the actual Axes
-    ax = g.axes[0, 0]
-
-    ax.xaxis.grid(True, "minor", linewidth=.25)
-    ax.yaxis.grid(True, "minor", linewidth=.25)
+    ax.set_ylim(0, 100)
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))  # Ticks every 10
+    ax.yaxis.set_minor_locator(mticker.MultipleLocator(1))   # Optional minor ticks
+    ax.xaxis.grid(True, which="minor", linewidth=.25)
+    ax.yaxis.grid(True, which="minor", linewidth=.25)
     sns.despine(ax=ax, left=True, bottom=True)
 
-    # Force y-axis 0–100
-    ax.set_ylim(0, 100)
-    ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
-
-    st.pyplot(g.fig)
+    st.pyplot(fig)
 
 else:
     st.warning("No data found for the selected date range.")
-
 
 
 
