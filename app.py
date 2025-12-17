@@ -119,7 +119,6 @@ if not filtered_df.empty:
 
     fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
     sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
-    st.pyplot(fig)
 else:
     st.warning("No data found for the selected date range.")
 
@@ -178,9 +177,17 @@ ax_scatter.set_ylabel("Bezettingsgraad (%)")
 # Move the legend outside so it doesn't cover data
 sns.move_legend(ax_scatter, "upper left", bbox_to_anchor=(1, 1))
 
-# --- RENDER ---
-st.pyplot(fig_scatter)
+# --- RENDER --
 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Heatmap")
+    st.pyplot(fig_heat)
+
+with col2:
+    st.subheader("Scatterplot")
+    st.pyplot(fig_scatter)
 
 
 
