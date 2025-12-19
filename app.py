@@ -273,7 +273,7 @@ elif option == 'Elektrische autos':
         (df_faainal["maximale_constructiesnelheid"] > 250)
     ].copy()
     
-    filtered_df2 = filtered_df.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
+    filtered_df2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
     
     fig2, ax2 = plt.subplots(figsize=(15, 12))
     sns.boxplot(
@@ -285,6 +285,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
