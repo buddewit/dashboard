@@ -265,8 +265,11 @@ elif option == 'Laadpaaldata':
 
 elif option == 'Elektrische autos':
     
-    df_faainal = pd.read_csv('elektrischeautos5.csv', delimiter=',', usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
-                   skip_blank_lines=True)
+    url = "https://drive.google.com/uc?export=download&id=18PefqMveefnbdKbincQeW6O8IBbcPSPw"
+
+    df_faainal = pd.read_csv(url, delimiter=',', 
+                         usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
+                         skip_blank_lines=True)
 
     filtered_df2 = df_faainal[
         (df_faainal["catalogusprijs"] > 100000) &
@@ -285,6 +288,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
