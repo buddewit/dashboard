@@ -7,7 +7,8 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import matplotlib.ticker as mticker
 from shapely import wkt
-import geopandas as gpd
+import geopandas as gpd4
+import gdown 
 
 st.set_page_config(
     page_title="US Population Dashboard",
@@ -265,11 +266,15 @@ elif option == 'Laadpaaldata':
 
 elif option == 'Elektrische autos':
     
-    url = "https://drive.google.com/uc?export=download&id=18PefqMveefnbdKbincQeW6O8IBbcPSPw"
-
-    df_faainal = pd.read_csv(url, delimiter=',', 
-                         usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
-                         skip_blank_lines=True)
+    file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
+    url = f"https://drive.google.com/uc?id={file_id}"
+    output = "elektrischeautos5.csv"
+    gdown.download(url, output, quiet=False)
+    
+    # Then read it
+    df_faainal = pd.read_csv(output, delimiter=',', 
+                             usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
+                             skip_blank_lines=True)
     #date_cols = [
     #"datum_eerste_tenaamstelling_in_nederland",
     #"datum_eerste_toelating",
@@ -308,6 +313,7 @@ elif option == 'Elektrische autos':
     #plt.tight_layout()
     #st.pyplot(fig2)
     
+
 
 
 
