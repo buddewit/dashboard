@@ -7,7 +7,7 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 import matplotlib.ticker as mticker
 from shapely import wkt
-import geopandas as gpd4
+import geopandas as gpd
 import gdown 
 
 st.set_page_config(
@@ -313,6 +313,7 @@ elif option == 'Elektrische autos':
     #plt.tight_layout()
     #st.pyplot(fig2)
     
+
 
 
 
