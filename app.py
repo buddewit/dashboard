@@ -270,16 +270,16 @@ elif option == 'Elektrische autos':
     df_faainal = pd.read_csv(url, delimiter=',', 
                          usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
                          skip_blank_lines=True)
-        date_cols = [
-        "datum_eerste_tenaamstelling_in_nederland",
-        "datum_eerste_toelating",
-        "datum_tenaamstelling"
+    date_cols = [
+    "datum_eerste_tenaamstelling_in_nederland",
+    "datum_eerste_toelating",
+    "datum_tenaamstelling"
     ]
     
     df_faainal[date_cols] = df_faainal[date_cols].apply(
-        pd.to_datetime,
-        format="%Y-%m-%d",
-        errors="coerce"
+    pd.to_datetime,
+    format="%Y-%m-%d",
+    errors="coerce"
     )
     
     # Show what we actually got
@@ -308,6 +308,7 @@ elif option == 'Elektrische autos':
     #plt.tight_layout()
     #st.pyplot(fig2)
     
+
 
 
 
