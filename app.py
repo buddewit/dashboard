@@ -263,10 +263,28 @@ elif option == 'Laadpaaldata':
     
     st.pyplot(fig_scatter)
 
-###elif option == 'Elektrische autos':
-###
-# --- RENDER --
+elif option == 'Elektrische autos':
+    
+    df_faainal = pd.read_csv('elektrischeautos5.csv', delimiter=',', usecols=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],  
+                   skip_blank_lines=True)
 
+    filtered_df2 = df_faainal[
+        (df_faainal["catalogusprijs"] > 100000) &
+        (df_faainal["maximale_constructiesnelheid"] > 250)
+    ].copy()
+    
+    filtered_df2 = filtered_df.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
+    
+    fig2, ax2 = plt.subplots(figsize=(15, 12))
+    sns.boxplot(
+        data=filtered_df2,
+        x="merk",
+        y="maximale_constructiesnelheid"
+    )
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    st.pyplot(fig2)
+    
 
 
 
