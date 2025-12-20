@@ -321,7 +321,7 @@ elif option == 'Elektrische autos':
         "Datum eerste toelating",
         min_value=(min_date4.toordinal()),
         max_value=(max_date4.toordinal()),
-        value=date.today().toordinal(),
+        value=(min_date4.toordinal(), max_date4.toordinal())
         #format="YYYY-MM-DD"
     )
 
@@ -375,6 +375,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
