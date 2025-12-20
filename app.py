@@ -286,13 +286,81 @@ elif option == 'Elektrische autos':
     format="%Y-%m-%d",
     errors="coerce"
     )
+###########################################################
+#    filtered_df2 = df_faainal[
+#        (df_faainal["catalogusprijs"] > 100000) &
+#        (df_faainal["maximale_constructiesnelheid"] > 250)
+#    ].copy()
+#    
+#    filtered_df2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
+###############################################################
 
-    filtered_df2 = df_faainal[
-        (df_faainal["catalogusprijs"] > 100000) &
-        (df_faainal["maximale_constructiesnelheid"] > 250)
-    ].copy()
+    min_date3 = df_faainal["catalogusprijs"].min()
+    max_date3 = df_faainal["catalogusprijs"].max()
     
-    filtered_df2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
+    min_date4 = df_faainal["datum_eerste_toelating"].min()
+    max_date4 = df_faainal["datum_eerste_toelating"].max()
+
+    min_date5 = df_faainal["maximale_constructiesnelheid"].min()
+    max_date5 = df_faainal["maximale_constructiesnelheid"].max()
+
+    #min_date6 = df_faainal.groupby('handelsbenaming').filter(lambda x: len(x).min()
+    #max_date6 = df_faainal.groupby('handelsbenaming').filter(lambda x: len(x).max()
+
+    # Use the datetime objects directly in the slider
+    range_ts3 = st.slider(
+        "Selecteer catalogusprijs",
+        min_value=min_date3, #to_pydatetime()
+        max_value=max_date3, #to_pydatetime() 
+        value=(min_date3, max_date3)
+        #format="DD-MM-YYYY"
+    )
+    range_ts4 = st.slider(
+        "Datum eerste toelating",
+        min_value=(min_date4),
+        max_value=(max_date4),
+        value=((min_date4), (max_date4)),
+        format="YYYY-MM-DD"
+    )
+     range_ts5 = st.slider(
+        "Datum eerste toelating",
+        min_value=(min_date5),
+        max_value=(max_date5),
+        value=((min_date5), (max_date5)),
+        #format="YYYY-MM-DD"
+    )
+     #range_ts6 = st.slider(
+     #   "Datum eerste toelating",
+     #   min_value=(min_date4),
+     #   max_value=(max_date4),
+     #   value=((min_date4), (max_date4)),
+     #   format="YYYY-MM-DD"
+     #)
+
+    
+    # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
+    start_range3, end_range3 = range_ts3
+    start_range4, end_range4 = range_ts4
+    start_range5, end_range5 = range_ts5
+    #start_range6, end_range6 = range_ts6
+    
+    # -------------------------
+    # 3️⃣ Filter and Pivot
+    # -------------------------
+    # Filter DataFrame using the slider values
+    
+    df_faainal = df_faainal[
+        (df_faainal["catalogusprijs"] >= start_range3) & 
+        (df_faainal["catalogusprijs"] <= end_range3) & 
+        (df_faainal["datum_eerste_toelating"] >= start_range4) & 
+        (df_faainal["datum_eerste_toelating"] <= end_range4)
+        (df_faainal["maximale_constructiesnelheid"] >= start_range5) & 
+        (df_faainal["maximale_constructiesnelheid"] <= end_range5)
+        #(df_faainal["hour"] >= start_range6) & 
+        #(df_faainal["hour"] <= end_range6)
+        ].copy()
+
+################################################
     
     fig2, ax2 = plt.subplots(figsize=(15, 12))
     sns.boxplot(
@@ -304,6 +372,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
