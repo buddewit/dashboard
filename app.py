@@ -343,7 +343,7 @@ elif option == 'Elektrische autos':
     
     # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
     start_range3, end_range3 = range_ts3
-    start_range4.toordinal(), end_range4.toordinal() = range_ts4
+    start_range4, end_range4 = range_ts4
     start_range5, end_range5 = range_ts5
     #start_range6, end_range6 = range_ts6
     
@@ -375,6 +375,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
