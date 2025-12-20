@@ -316,6 +316,7 @@ elif option == 'Elektrische autos':
         value=(min_date3, max_date3)
         #format="DD-MM-YYYY"
     )
+
     range_ts4 = st.slider(
         "Datum eerste toelating",
         min_value=(min_date4.toordinal()),
@@ -323,6 +324,7 @@ elif option == 'Elektrische autos':
         value=date.today().toordinal(),
         #format="YYYY-MM-DD"
     )
+
     range_ts5 = st.slider(
         "Datum eerste toelating",
         min_value=(min_date5),
@@ -341,7 +343,7 @@ elif option == 'Elektrische autos':
     
     # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
     start_range3, end_range3 = range_ts3
-    start_range4, end_range4 = range_ts4
+    start_range4.toordinal(), end_range4.toordinal() = range_ts4
     start_range5, end_range5 = range_ts5
     #start_range6, end_range6 = range_ts6
     
@@ -356,10 +358,10 @@ elif option == 'Elektrische autos':
         (df_faainal["datum_eerste_toelating"] >= start_range4) & 
         (df_faainal["datum_eerste_toelating"] <= end_range4)
         (df_faainal["maximale_constructiesnelheid"] >= start_range5) & 
-        (df_faainal["maximale_constructiesnelheid"] <= end_range5)
+        (df_faainal["maximale_constructiesnelheid"] <= end_range5)].copy()
         #(df_faainal["hour"] >= start_range6) & 
         #(df_faainal["hour"] <= end_range6)
-        ].copy()
+        
 
 ################################################
     
@@ -373,6 +375,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
