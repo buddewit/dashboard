@@ -376,7 +376,13 @@ elif option == 'Elektrische autos':
     plt.xticks(rotation=90)
     plt.tight_layout()
     st.pyplot(fig2)
-    
+
+    fig3, ax3 = plt.subplots(figsize=(15, 12))
+    sns.relplot(x="massa_rijklaar", y="maximale_constructiesnelheid", hue="klasse_hybride_elektrisch_voertuig", size="catalogusprijs",
+            sizes=(40, 400), alpha=.5, palette="muted",
+            height=6, data=filtered_df2)
+    st.pyplot(fig3)
+
 
 
 
