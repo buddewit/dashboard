@@ -319,9 +319,9 @@ elif option == 'Elektrische autos':
 
     range_ts4 = st.slider(
         "Datum eerste toelating",
-        min_value=(min_date4.toordinal()),
-        max_value=(max_date4.toordinal()),
-        value=(min_date4.toordinal(), max_date4.toordinal()),
+        min_value=(min_date4),
+        max_value=(max_date4),
+        value=(min_date4, max_date4),
         format="YYYY-MM-DD"
     )
 
@@ -357,8 +357,8 @@ elif option == 'Elektrische autos':
     filtered_df2 = df_faainal[
         (df_faainal["catalogusprijs"] >= start_range3) & 
         (df_faainal["catalogusprijs"] <= end_range3) & 
-        (df_faainal["datum_eerste_toelating"] >= pd.Timestamp(start_range4)) & 
-        (df_faainal["datum_eerste_toelating"] <= pd.Timestamp(end_range4)) &
+        (df_faainal["datum_eerste_toelating"] >= start_range4) & 
+        (df_faainal["datum_eerste_toelating"] <= end_range4) &
         (df_faainal["maximale_constructiesnelheid"] >= start_range5) & 
         (df_faainal["maximale_constructiesnelheid"] <= end_range5)].copy()
         #(df_faainal["hour"] >= start_range6) & 
@@ -377,6 +377,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
