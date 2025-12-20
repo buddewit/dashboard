@@ -299,8 +299,8 @@ elif option == 'Elektrische autos':
     min_date3 = 10000
     max_date3 = 500000
     
-    min_date4 = df_faainal["datum_eerste_toelating"].min()
-    max_date4 = df_faainal["datum_eerste_toelating"].max()
+    min_date4 = df_faainal["datum_eerste_toelating"].min().to_pydatetime()
+    max_date4 = df_faainal["datum_eerste_toelating"].max().to_pydatetime()
 
     min_date5 = df_faainal["maximale_constructiesnelheid"].min()
     max_date5 = df_faainal["maximale_constructiesnelheid"].max()
@@ -343,8 +343,8 @@ elif option == 'Elektrische autos':
     
     # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
     start_range3, end_range3 = range_ts3
-    start_range4 = date.fromordinal(range_ts4[0])
-    end_range4 = date.fromordinal(range_ts4[1])
+    start_range4 = pd.Timestamp(start_range4)
+    end_range4 = pd.Timestamp(end_range4)
     start_range5, end_range5 = range_ts5
     #start_range6, end_range6 = range_ts6
     
@@ -376,6 +376,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
