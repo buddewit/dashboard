@@ -353,7 +353,7 @@ elif option == 'Elektrische autos':
     # -------------------------
     # Filter DataFrame using the slider values
     
-    df_faainal = df_faainal[
+    filtered_df2 = df_faainal[
         (df_faainal["catalogusprijs"] >= start_range3) & 
         (df_faainal["catalogusprijs"] <= end_range3) & 
         (df_faainal["datum_eerste_toelating"] >= pd.Timestamp(start_range4)) & 
@@ -376,6 +376,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
