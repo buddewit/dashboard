@@ -9,6 +9,7 @@ import matplotlib.ticker as mticker
 from shapely import wkt
 import geopandas as gpd
 import gdown 
+from datetime import date
 
 st.set_page_config(
     page_title="US Population Dashboard",
@@ -372,6 +373,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
