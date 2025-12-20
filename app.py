@@ -310,7 +310,7 @@ elif option == 'Elektrische autos':
 
     # Use the datetime objects directly in the slider
     range_ts3 = st.slider(
-        "Selecteer catalogusprijs",
+        "Selecteer catalogusprijs (€)",
         min_value=min_date3, #to_pydatetime()
         max_value=max_date3, #to_pydatetime() 
         value=(min_date3, max_date3)
@@ -321,12 +321,12 @@ elif option == 'Elektrische autos':
         "Datum eerste toelating",
         min_value=(min_date4.toordinal()),
         max_value=(max_date4.toordinal()),
-        value=(min_date4.toordinal(), max_date4.toordinal())
-        #format="YYYY-MM-DD"
+        value=(min_date4.toordinal(), max_date4.toordinal()),
+        format="YYYY-MM-DD"
     )
 
     range_ts5 = st.slider(
-        "Datum eerste toelating",
+        "Maximale snelheid (km/h)",
         min_value=(min_date5),
         max_value=(max_date5),
         value=(min_date5, max_date5)
@@ -376,6 +376,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
