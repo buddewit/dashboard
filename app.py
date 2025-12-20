@@ -319,8 +319,8 @@ elif option == 'Elektrische autos':
         "Datum eerste toelating",
         min_value=(min_date4.toordinal()),
         max_value=(max_date4.toordinal()),
-        value=(min_date4.toordinal(), max_date4.toordinal()),
-        format="YYYY-MM-DD"
+        value=date.today().toordinal(),
+        #format="YYYY-MM-DD"
     )
     range_ts5 = st.slider(
         "Datum eerste toelating",
@@ -372,6 +372,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
