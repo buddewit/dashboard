@@ -296,8 +296,8 @@ elif option == 'Elektrische autos':
 #    filtered_df2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 2)
 ###############################################################
 
-    min_date3 = df_faainal["catalogusprijs"].min()
-    max_date3 = df_faainal["catalogusprijs"].max()
+    min_date3 = 10000
+    max_date3 = 500000
     
     min_date4 = df_faainal["datum_eerste_toelating"].min()
     max_date4 = df_faainal["datum_eerste_toelating"].max()
@@ -376,6 +376,7 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
     
+
 
 
 
