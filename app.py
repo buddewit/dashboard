@@ -405,8 +405,13 @@ elif option == 'Elektrische autos':
 ##################################################
 #heatmap
     
-    st.selectbox("Selecteer een automerk", filtered_df2['merk'].unique())
-            
+    selected_brand = st.selectbox(
+    "Selecteer een automerk",
+    sorted(filtered_df2['merk'].unique()))
+
+    subset2 = filtered_df2[
+    filtered_df2['merk'] == selected_brand
+    
     sns.set_theme()
     
     subset2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 500)
@@ -425,6 +430,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
