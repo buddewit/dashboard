@@ -408,7 +408,7 @@ elif option == 'Elektrische autos':
     options = filtered_df2['merk']
     selected_brand = st.selectbox("Selecteer een automerk", options)
     
-    st.write("Je hebt", selected_brand, "geselecteerd)
+    st.write("Je hebt", selected_brand, "geselecteerd")
             
     sns.set_theme()
     
@@ -428,6 +428,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
