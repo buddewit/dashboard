@@ -373,7 +373,7 @@ elif option == 'Elektrische autos':
         
 
 ################################################
-    
+#boxplot    
     fig2, ax2 = plt.subplots(figsize=(15, 12))
     sns.boxplot(
         data=filtered_df2,
@@ -384,6 +384,36 @@ elif option == 'Elektrische autos':
     plt.tight_layout()
     st.pyplot(fig2)
 
+
+##################################################
+#heatmap
+    sns.set_theme()
+    
+    subset2 = df_faainal[
+        df_faainal['maximale_constructiesnelheid'].between(0, 350) &
+        (df_faainal['voertuigsoort'] == 'Personenauto') &
+        (df_faainal['merk'] == 'AUDI') &
+        df_faainal['catalogusprijs'].between(10000, 19990000)
+    ]
+    
+    subset2 = subset2.groupby('handelsbenaming').filter(lambda x: len(x) > 500)
+    
+    # Pivot with aggregation
+    flights = subset2.pivot_table(
+        index="handelsbenaming",
+        columns="jaar",
+        values="datum_eerste_toelating",
+        aggfunc="count"
+    )
+    
+    # Create figure and heatmap
+    f, ax = plt.subplots(figsize=(9, 6))
+    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+    
+    # ✅ Show in Streamlit
+    st.pyplot(f)
+######################################################
+#relplot    
     g = sns.relplot(
     x="massa_rijklaar",
     y="maximale_constructiesnelheid",
@@ -396,6 +426,7 @@ elif option == 'Elektrische autos':
     data=filtered_df2)
 
     st.pyplot(g.fig)  # ✅ use the figure behind the FacetGrid
+
 
 
 
