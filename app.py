@@ -177,11 +177,6 @@ elif option == 'Laadpaaldata':
     start_range, end_range = range_ts
     start_range2, end_range2 = range_ts2
     
-    # -------------------------
-    # 3️⃣ Filter and Pivot
-    # -------------------------
-    # Filter DataFrame using the slider values
-    
     filtered_df = fd3[
         (fd3["Maxgevraagd(w)"] >= start_range) & 
         (fd3["Maxgevraagd(w)"] <= end_range) & 
@@ -212,9 +207,7 @@ elif option == 'Laadpaaldata':
     st.pyplot(fig)
 
 
-
-    # --- CLEANING PHASE ---
-    # 1. Work on a fresh copy so we don't mess up your heatmap data
+##
     df_plot = filtered_df.copy()
     
     # 2. Force conversion of everything to numbers (Standardizing commas/strings)
@@ -248,29 +241,33 @@ elif option == 'Laadpaaldata':
         sizes=(20, 200),
         ax=ax_scatter
     )
-    
-    # --- AXIS ENFORCEMENT ---
-    # Explicitly set the limits (0 to 100)
+
+    #y as aanpassen
     ax_scatter.set_ylim(-2, 102)
     
-    # Explicitly set the ticks (0, 10, 20... 100)
+    #y as afstand 
     ax_scatter.set_yticks(range(0, 101, 10))
-    
-    # Clean up labels
+
     ax_scatter.set_title("Bezetting over Tijd")
     ax_scatter.set_ylabel("Bezettingsgraad (%)")
     
-    # Move the legend outside so it doesn't cover data
+    # legenda verplaatsen
     sns.move_legend(ax_scatter, "lower center", bbox_to_anchor=(0.5, -0.3), ncol=4)
     
     st.pyplot(fig_scatter)
 
 elif option == 'Elektrische autos':
     
-    file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
-    url = f"https://drive.google.com/uc?id={file_id}"
-    output = "elektrischeautos5.csv"
-    gdown.download(url, output, quiet=False)
+    #file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
+    #url = f"https://drive.google.com/uc?id={file_id}"
+    #output = "elektrischeautos5.csv"
+    #gdown.download(url, output, quiet=False)
+
+    @st.cache_data
+    def load_data():
+        file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
+        url = f"https://drive.google.com/uc?id={file_id}"
+        output = "elektrischeautos5.csv"
     
     # Then read it
     df_faainal = pd.read_csv(output, delimiter=',', 
@@ -382,6 +379,7 @@ elif option == 'Elektrische autos':
             sizes=(40, 400), alpha=.5, palette="muted",
             height=6, data=filtered_df2)
     st.pyplot(fig3)
+
 
 
 
