@@ -407,7 +407,7 @@ elif option == 'Elektrische autos':
     
     selected_brand = st.selectbox(
     "Selecteer een automerk",
-    sorted(filtered_df2['merk'].unique()))
+    filtered_df2['merk'].unique())
 
     subset2 = filtered_df2[
     filtered_df2['merk'] == selected_brand]
@@ -430,6 +430,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
