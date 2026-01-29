@@ -405,7 +405,7 @@ elif option == 'Elektrische autos':
 ##################################################
 #heatmap
     
-    st.selectbox("Selecteer een automerk", filtered_df2['merk'])
+    st.selectbox("Selecteer een automerk", filtered_df2['merk'].unique())
             
     sns.set_theme()
     
@@ -425,6 +425,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
