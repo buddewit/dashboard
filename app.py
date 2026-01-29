@@ -403,8 +403,7 @@ elif option == 'Elektrische autos':
 
 
 ##################################################
-#heatmap
-    
+#auto specifiek#   
     selected_brand = st.selectbox(
     "Selecteer een automerk",
     filtered_df2["merk"].unique())
@@ -415,8 +414,22 @@ elif option == 'Elektrische autos':
     sns.set_theme()
     
     subset2 = subset2.groupby('handelsbenaming').filter(lambda x: len(x) > 50)
-    
-    # Pivot with aggregation
+###################
+#displot 
+    l = sns.displot(
+    data=subset2,
+    x="datum_eerste_toelating", 
+    hue="handelsbenaming",
+    kind="kde", 
+    height=6,
+    multiple="fill",
+    #clip=(0, None),
+    palette="hsv"
+    )
+
+    st.pyplot(l.fig)
+ ######################
+ #heatmap   Pivot with aggregation
     flights = subset2.pivot_table(
         index="handelsbenaming",
         columns="jaar",
@@ -430,6 +443,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
