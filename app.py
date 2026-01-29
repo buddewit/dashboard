@@ -269,8 +269,8 @@ elif option == 'Elektrische autos':
         url = f"https://drive.google.com/uc?id={file_id}"
         output = "elektrischeautos5.csv"
     
-        if not os.path.exists(output):
-            gdown.download(url, output, quiet=True)
+        #if not os.path.exists(output):
+        #    gdown.download(url, output, quiet=True)
     
         df_faainal = pd.read_csv(
             output,
@@ -389,6 +389,7 @@ elif option == 'Elektrische autos':
             sizes=(40, 400), alpha=.5, palette="muted",
             height=6, data=filtered_df2)
     st.pyplot(fig3)
+
 
 
 
