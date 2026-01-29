@@ -414,7 +414,7 @@ elif option == 'Elektrische autos':
     
     sns.set_theme()
     
-    subset2 = filtered_df2.groupby('handelsbenaming').filter(lambda x: len(x) > 500)
+    subset2 = subset2.groupby('handelsbenaming').filter(lambda x: len(x) > 500)
     
     # Pivot with aggregation
     flights = subset2.pivot_table(
@@ -430,6 +430,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
