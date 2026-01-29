@@ -263,25 +263,25 @@ elif option == 'Elektrische autos':
     #output = "elektrischeautos5.csv"
     #gdown.download(url, output, quiet=False)
 
-
     @st.cache_data
     def load_data():
         file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
         url = f"https://drive.google.com/uc?id={file_id}"
         output = "elektrischeautos5.csv"
     
-        # Only download if the file doesn't exist
         if not os.path.exists(output):
             gdown.download(url, output, quiet=True)
     
-        # Read the CSV inside the function
         df_faainal = pd.read_csv(
             output,
             delimiter=',',
             usecols=list(range(15)),
-            skip_blank_lines=True)
+            skip_blank_lines=True
+        )
     
         return df_faainal
+        
+    df_faainal = load_data()
 
     date_cols = [
     "datum_eerste_tenaamstelling_in_nederland",
@@ -389,6 +389,7 @@ elif option == 'Elektrische autos':
             sizes=(40, 400), alpha=.5, palette="muted",
             height=6, data=filtered_df2)
     st.pyplot(fig3)
+
 
 
 
