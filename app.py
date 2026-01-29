@@ -410,7 +410,7 @@ elif option == 'Elektrische autos':
     sorted(filtered_df2['merk'].unique()))
 
     subset2 = filtered_df2[
-    filtered_df2['merk'] == selected_brand
+    filtered_df2['merk'] == selected_brand]
     
     sns.set_theme()
     
@@ -430,6 +430,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
