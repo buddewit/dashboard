@@ -281,7 +281,7 @@ elif option == 'Elektrische autos':
             usecols=list(range(15)),
             skip_blank_lines=True)
     
-    return df_faainal
+        return df_faainal
 
     date_cols = [
     "datum_eerste_tenaamstelling_in_nederland",
@@ -389,6 +389,7 @@ elif option == 'Elektrische autos':
             sizes=(40, 400), alpha=.5, palette="muted",
             height=6, data=filtered_df2)
     st.pyplot(fig3)
+
 
 
 
