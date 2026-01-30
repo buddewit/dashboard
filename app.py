@@ -78,11 +78,21 @@ if option == 'Openchargemap':
     # Convert to GeoDataFrame
     gdf_munis = gpd.GeoDataFrame(gdf_munis, geometry='geometry', crs="EPSG:4326")
 
-    #gdf_munis = fd3[
-    #    (fd3["Maxgevraagd(w)"] >= start_range) & 
-    #    (fd3["Maxgevraagd(w)"] <= end_range) &
-    #    (fd3["hour"] >= start_range2) & 
-    #    (fd3["hour"] <= end_range2)].copy()
+    min_date10 = df_muni["avg_power"].min()
+    max_date10 = df_muni["avg_power"].max()
+    
+    range_ts10 = st.slider(
+        "Selecteer minmale en maximale stroomtoevoer",
+        min_value=min_date10, #to_pydatetime()
+        max_value=max_date10, #to_pydatetime() 
+        value=(min_date10, max_date10)
+        #format="DD-MM-YYYY"
+
+    start_range10, end_range10 = range_ts10
+        
+    df_muni = df_muni[
+        (df_muni["avg_power"] >= start_range10) & 
+        (df_muni["avg_power"] <= end_range10)].copy()
     
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
@@ -472,6 +482,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
