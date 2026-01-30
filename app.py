@@ -260,7 +260,7 @@ elif option == 'Laadpaaldata':
 
 elif option == 'Elektrische autos':
 
-    st.title('Elektrische auto's dashboard')
+    st.title('Elektrische autos dashboard')
     
     #file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
     #url = f"https://drive.google.com/uc?id={file_id}"
@@ -447,6 +447,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
