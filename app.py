@@ -10,6 +10,7 @@ from shapely import wkt
 import geopandas as gpd
 import gdown 
 from datetime import date
+import os
 
 st.set_page_config(
     page_title="Elektrisch Vervoer Dashboard",
@@ -481,6 +482,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
