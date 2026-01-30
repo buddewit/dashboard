@@ -321,7 +321,7 @@ elif option == 'Elektrische autos':
 
         #df_faainal = df_faainal.iloc[:, :15]
     
-        return df_faainal
+    return df_faainal
 
         
     df_faainal = load_data()
@@ -486,6 +486,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
