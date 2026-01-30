@@ -313,8 +313,7 @@ elif option == 'Elektrische autos':
     
         df_faainal = pd.read_csv(
             output,
-            delimiter=';',
-            on_bad_lines='skip',
+            delimiter=',',
             skip_blank_lines=True
         )
 
@@ -485,6 +484,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
