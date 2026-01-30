@@ -178,11 +178,8 @@ elif option == 'Laadpaaldata':
     # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
     start_range, end_range = range_ts
     start_range2, end_range2 = range_ts2
-    start_range3, end_range3 = range_ts3
     
     filtered_df = fd3[
-        (fd3["Maxgevraagd(w)"] >= start_range) & 
-        (fd3["Maxgevraagd(w)"] <= end_range) &
         (fd3["Maxgevraagd(w)"] >= start_range) & 
         (fd3["Maxgevraagd(w)"] <= end_range) &
         (fd3["hour"] >= start_range2) & 
@@ -465,6 +462,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
