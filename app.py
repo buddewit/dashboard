@@ -86,7 +86,6 @@ if option == 'Openchargemap':
         min_value=min_date10, #to_pydatetime()
         max_value=max_date10, #to_pydatetime() 
         value=(min_date10, max_date10)
-        #format="DD-MM-YYYY"
     )
     
     start_range10, end_range10 = range_ts10
@@ -483,6 +482,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
