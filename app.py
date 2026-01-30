@@ -178,10 +178,13 @@ elif option == 'Laadpaaldata':
     # range_ts is already a tuple of datetime objects, no need to convert with unit="s"
     start_range, end_range = range_ts
     start_range2, end_range2 = range_ts2
+    start_range3, end_range3 = range_ts3
     
     filtered_df = fd3[
         (fd3["Maxgevraagd(w)"] >= start_range) & 
-        (fd3["Maxgevraagd(w)"] <= end_range) & 
+        (fd3["Maxgevraagd(w)"] <= end_range) &
+        (fd3["Maxgevraagd(w)"] >= start_range) & 
+        (fd3["Maxgevraagd(w)"] <= end_range) &
         (fd3["hour"] >= start_range2) & 
         (fd3["hour"] <= end_range2)].copy()
     
@@ -195,6 +198,8 @@ elif option == 'Laadpaaldata':
     months = ["jan-24", "feb-24", "mrt-24", "apr-24", "mei-24", "jun-24",
               "jul-24", "aug-24", "sep-24", "okt-24", "nov-24", "dec-24"]
     filtered_df["Maandjaar"] = pd.Categorical(filtered_df["Maandjaar"], categories=months, ordered=True)
+
+    #st.subheader('Bezettingsgraad (%) versus maand')
     
     # Generate Heatmap
     flights = filtered_df.pivot_table(
@@ -205,7 +210,7 @@ elif option == 'Laadpaaldata':
         )
     
     fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
-    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax, title='Bezettingsgraad (%) versus maand')
     st.pyplot(fig)
 
 
@@ -460,6 +465,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
