@@ -304,10 +304,10 @@ elif option == 'Elektrische autos':
 
     @st.cache_data
     def load_data():
-        file_id = "1cz_5osrsy0soUgydc-x_NLL3PGfqLBjW"
+        file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
         url = f"https://drive.google.com/uc?id={file_id}"
-        output = "elektrischeautos4.csv"
-    
+        output = "elektrischeautos5.csv"
+        
         if not os.path.exists(output):
             gdown.download(url, output, quiet=True)
     
@@ -321,7 +321,7 @@ elif option == 'Elektrische autos':
 
         #df_faainal = df_faainal.iloc[:, :15]
     
-    return df_faainal
+        return df_faainal
 
         
     df_faainal = load_data()
@@ -486,6 +486,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
