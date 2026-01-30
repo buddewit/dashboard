@@ -78,6 +78,12 @@ if option == 'Openchargemap':
     # Convert to GeoDataFrame
     gdf_munis = gpd.GeoDataFrame(gdf_munis, geometry='geometry', crs="EPSG:4326")
 
+    #gdf_munis = fd3[
+    #    (fd3["Maxgevraagd(w)"] >= start_range) & 
+    #    (fd3["Maxgevraagd(w)"] <= end_range) &
+    #    (fd3["hour"] >= start_range2) & 
+    #    (fd3["hour"] <= end_range2)].copy()
+    
     # Base map
     m = folium.Map(location=[52.1, 5.3], zoom_start=8)
     
@@ -466,6 +472,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
