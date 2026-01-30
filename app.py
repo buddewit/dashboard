@@ -306,7 +306,7 @@ elif option == 'Elektrische autos':
     def load_data():
         file_id = "1cz_5osrsy0soUgydc-x_NLL3PGfqLBjW"
         url = f"https://drive.google.com/uc?id={file_id}"
-        output = "elektrischeautos5 (2).csv"
+        output = "elektrischeautos4.csv"
     
         if not os.path.exists(output):
             gdown.download(url, output, quiet=True)
@@ -482,6 +482,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
