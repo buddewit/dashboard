@@ -313,11 +313,15 @@ elif option == 'Elektrische autos':
     
         df_faainal = pd.read_csv(
             output,
-            delimiter=',',
+            delimiter=';',
+            on_bad_lines='skip',
             skip_blank_lines=True
         )
+
+        df_faainal = df_faainal.iloc[:, :15]
     
         return df_faainal
+
         
     df_faainal = load_data()
 
@@ -481,6 +485,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
