@@ -12,8 +12,8 @@ import gdown
 from datetime import date
 
 st.set_page_config(
-    page_title="US Population Dashboard",
-    page_icon="🏂",
+    page_title="Elektrisch Vervoer Dashboard",
+    page_icon="🚗⚡",
     layout="wide",
     initial_sidebar_state="expanded")
 
@@ -33,22 +33,22 @@ st.markdown(
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
     option = st.selectbox('Selecteer een weergave', 
-                         ['Laadpaalmap', 'Laadpaaldata', 'Elektrische autos'])
+                         ['Openchargemap', 'Laadpaaldata', 'Elektrische autos'])
 
 # Set the title
-st.title('Hello Streamlit!')
+#st.title('Hello Streamlit!')
 
 # Add a header
-st.header('Welcome to my first Streamlit app')
+#st.header('Welcome to my first Streamlit app')
 
 # Add a subheader
-st.subheader('This is a subheader')
+#st.subheader('This is a subheader')
 
 # Add text
-st.text('This is a simple text.')
+#st.text('This is a simple text.')
 
 # Add a markdown
-st.markdown('### This is a markdown')
+#st.markdown('### This is a markdown')
 
 # Add a button
 if st.button('Click me'):
@@ -78,9 +78,9 @@ sns.set_theme()
 # 1️⃣ Load and Prepare Data
 # -------------------------
 
-if option == 'Laadpaalmap':
+if option == 'Openchargemap':
 
-    st.title("⚡ EV Charging Stations Dashboard")
+    st.title("⚡ Openchargemap Dashboard")
     
     df_muni = pd.read_csv("df_muni.csv", delimiter=",")
     gdf_points = pd.read_csv("gdf_points.csv", delimiter=",")
@@ -135,6 +135,8 @@ if option == 'Laadpaalmap':
     st_folium(m, width=1400, height=600)
 
 elif option == 'Laadpaaldata':
+    
+    st.title('Laadpaaldata dashboard')
     
     fd3 = pd.read_csv("fd2.csv", delimiter=";")
     
@@ -257,6 +259,8 @@ elif option == 'Laadpaaldata':
     st.pyplot(fig_scatter)
 
 elif option == 'Elektrische autos':
+
+    st.title('Elektrische auto's dashboard')
     
     #file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
     #url = f"https://drive.google.com/uc?id={file_id}"
@@ -443,6 +447,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
