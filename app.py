@@ -208,7 +208,10 @@ elif option == 'Laadpaaldata':
         )
     
     fig, ax = plt.subplots(figsize=(12, 6), dpi=150)
-    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax, title='Bezettingsgraad (%) versus maand')
+    sns.heatmap(flights, annot=True, fmt=".0f", linewidths=.5, cmap="YlGnBu", ax=ax)
+
+    ax.set_title("Bezettingsgraad (%) versus maand")
+    
     st.pyplot(fig)
 
 
@@ -463,6 +466,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
