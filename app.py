@@ -17,19 +17,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-st.markdown(
-    """
-    <style>
-    .block-container {
-        max-width: 1200px;
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
     option = st.selectbox('Selecteer een weergave', 
@@ -135,6 +122,19 @@ if option == 'Openchargemap':
     st_folium(m, width=1400, height=600)
 
 elif option == 'Laadpaaldata':
+
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            max-width: 1200px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     
     st.title('Laadpaaldata dashboard')
     
@@ -260,6 +260,19 @@ elif option == 'Laadpaaldata':
 
 elif option == 'Elektrische autos':
 
+    st.markdown(
+    """
+    <style>
+    .block-container {
+        max-width: 1200px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+    
     st.title('Elektrische autos dashboard')
     
     #file_id = "18PefqMveefnbdKbincQeW6O8IBbcPSPw"
@@ -447,6 +460,7 @@ elif option == 'Elektrische autos':
     
     # ✅ Show in Streamlit
     st.pyplot(f)
+
 
 
 
